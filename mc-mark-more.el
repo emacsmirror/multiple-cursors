@@ -127,7 +127,7 @@ Use like case-fold-search, don't recommend setting it globally.")
 With negative ARG, delete the last one instead.
 With zero ARG, skip the last one and mark next."
   (interactive "p")
-  (if (region-active-p)
+  (if (and mark-active (/= (point) (mark)))
       (if (< arg 0)
           (let ((cursor (mc/furthest-cursor-after-point)))
             (if cursor
@@ -155,7 +155,7 @@ With zero ARG, skip the last one and mark next."
 With negative ARG, delete the last one instead.
 With zero ARG, skip the last one and mark next."
   (interactive "p")
-  (if (region-active-p)
+  (if (and mark-active (/= (point) (mark)))
       (if (< arg 0)
           (let ((cursor (mc/furthest-cursor-before-point)))
             (if cursor
@@ -226,7 +226,7 @@ With zero ARG, skip the last one and mark next."
 (defun mc/mark-all-like-this ()
   "Find and mark all the parts of the buffer matching the currently active region"
   (interactive)
-  (unless (region-active-p)
+  (unless (and mark-active (/= (point) (mark)))
     (error "Mark a region to match first."))
   (mc/remove-fake-cursors)
   (let ((master (point))
@@ -253,7 +253,7 @@ With zero ARG, skip the last one and mark next."
       bound)))
 
 (defun mc--select-thing-at-point-or-bark (thing)
-  (unless (or (region-active-p) (mc--select-thing-at-point thing))
+  (unless (or (and mark-active (/= (point) (mark))) (mc--select-thing-at-point thing))
     (error "Mark a region or set cursor on a %s." thing)))
 
 ;;;###autoload
@@ -435,7 +435,7 @@ If the region is active and spans multiple lines, it will behave
 as if `mc/mark-all-in-region'. With the prefix ARG, it will call
 `mc/edit-lines' instead.
 
-If the region is inactive or on a single line, it will behave like 
+If the region is inactive or on a single line, it will behave like
 `mc/mark-all-like-this-dwim'."
   (interactive "P")
   (if (and (use-region-p)

@@ -1,8 +1,10 @@
-(let* ((current-directory (file-name-directory load-file-name))
-       (features-directory (expand-file-name ".." current-directory))
-       (project-directory (expand-file-name ".." features-directory)))
-  (setq multiple-cursors-root-path project-directory)
-  (setq multiple-cursors-util-path (expand-file-name "util" project-directory)))
+;; -*- lexical-binding: t; -*-
+(defvar multiple-cursors-root-path
+  (let* ((current-directory (file-name-directory load-file-name))
+         (features-directory (expand-file-name ".." current-directory)))
+    (expand-file-name ".." features-directory)))
+(defvar multiple-cursors-util-path
+  (expand-file-name "util" multiple-cursors-root-path))
 
 (add-to-list 'load-path multiple-cursors-root-path)
 (add-to-list 'load-path multiple-cursors-util-path)

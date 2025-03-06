@@ -1,10 +1,10 @@
-;;; multiple-cursors.el --- Multiple cursors for emacs.  -*- lexical-binding: t; -*-
+;;; multiple-cursors.el --- Multiple cursors for Emacs  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2012-2016 Magnar Sveen
 
 ;; Author: Magnar Sveen <magnars@gmail.com>
 ;; Package-Version: 1.5.0
-;; Package-Requires: ((cl-lib "0.5"))
+;; Package-Requires: ((emacs "24.4") (cl-lib "0.5"))
 ;; Keywords: editing cursors
 ;; Homepage: https://github.com/magnars/multiple-cursors.el
 
